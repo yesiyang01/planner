@@ -17,7 +17,7 @@ let enableSync = process.env.COBALT_ENABLE_DB_SYNC || 'true'
 
 // Database connection setup
 mongoose.Promise = global.Promise
-mongoose.connect(process.env.COBALT_MONGO_URI || 'mongodb://localhost/cobalt', err => {
+mongoose.connect('mongodb://localhost/cobalt', err => {
   if (err) throw new Error(`Failed to connect to MongoDB [${process.env.COBALT_MONGO_URI}]: ${err.message}`)
   if (!test) {
     winston.info('Connected to MongoDB')
@@ -34,14 +34,14 @@ if (!test && enableSync == 'true') {
 
 // API routes
 let apiVersion = '1.0'
-app.use(`/${apiVersion}/athletics`, athletics)
-app.use(`/${apiVersion}/buildings`, buildings)
-app.use(`/${apiVersion}/courses`, courses)
-app.use(`/${apiVersion}/exams`, exams)
-app.use(`/${apiVersion}/food`, food)
-app.use(`/${apiVersion}/textbooks`, textbooks)
-app.use(`/${apiVersion}/transportation`, transportation)
-app.use(`/${apiVersion}/cdf`, cdf)
+app.use(`/athletics`, athletics)
+app.use(`/buildings`, buildings)
+app.use(`/courses`, courses)
+app.use(`/exams`, exams)
+app.use(`/food`, food)
+app.use(`/textbooks`, textbooks)
+app.use(`/transportation`, transportation)
+app.use(`/cdf`, cdf)
 
 // Error handlers
 app.use((req, res, next) => {
